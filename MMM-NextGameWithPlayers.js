@@ -9,7 +9,6 @@ Module.register("MMM-NextGameWithPlayers",{
     },
 
     socketNotificationReceived: function(notification, payload) {
-
         if(notification === 'GET_ALL_PLAYERS_NEXT_GAME'){
           this.players.home = payload.home;
           this.players.away = payload.away;

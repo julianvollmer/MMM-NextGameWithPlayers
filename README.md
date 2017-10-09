@@ -1,8 +1,9 @@
-# MMM-AllPlayers
+# MMM-NextGameWithPlayers
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-Shows a table with all the players from your favorite team.
+Shows a table with all the players from your favorite team and the next Opponent. Based on [MMM-AllPlayers](https://github.com/julianvollmer/MMM-AllPlayers)
+The module is using [this API](http://api.football-data.org/index)
 
 ## Visualisation
 ![visualisation of the court](https://forum.magicmirror.builders/assets/uploads/files/1507461935811-all-player.png)
@@ -18,7 +19,7 @@ To use this module, add the following configuration block to the modules array i
 var config = {
     modules: [
         {
-	        module: 'MMM-AllPlayers',
+	        module: 'MMM-NextGameWithPlayers',
 	        position: 'top_center',  // This can be any of the regions. Best results in left or right regions.
 	        header: 'Alle Spieler', // Topic of your modul.
 		    config: {
