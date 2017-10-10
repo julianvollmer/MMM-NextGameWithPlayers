@@ -18,33 +18,39 @@ Module.register("MMM-NextGameWithPlayers",{
 
     // Override dom generator.
     getDom: function() {
-       
-        var wrapper = document.createElement("table");
-        wrapper.className = "normal small light bg";
-        
-        var court = this.getCourtModel();
+        var courtDiv = document.createElement("div")
+        var myTeam = document.createElement("table");
+        var opponent = document.createElement("table");
+
+        courtDiv.className = "normal small light bg";
+
+        var courtMyTeam = this.getCourtModel();
         
         for (var i = 0; i < this.players.home.length; i++) {
-          this.addToCourt(court, this.players.home[i]);
+          this.addToCourt(courtMyTeam, this.players.home[i]);
         }
       
-        this.addCourtToWrapper(court, wrapper);
+        this.addCourtToWrapper(courtMyTeam, myTeam);
 
-        var middleRow = document.createElement("tr");
-        var middleCell = document.createElement("td");
-        middleCell.innerHTML = "--------------------"
-        middleCell.colSpan = "3";
-        middleRow.appendChild(middleCell);
-        wrapper.appendChild(middleRow);
+        courtDiv.appendChild(myTeam);
 
-        var court = this.getCourtModelOpponent();
+        var middleDiv = document.createElement("div");
         
-        for (var i = 0; i < this.players.away.length; i++) {
-          this.addToCourt(court, this.players.away[i]);
+        middleDiv.innerHTML = "--------------------"
+        courtDiv.appendChild(middleDiv);
+
+        var courtOpponent = this.getCourtModelOpponent();
+        
+        for (var i = 0; i < this.players.home.length; i++) {
+          this.addToCourt(courtOpponent, this.players.home[i]);
         }
       
-        this.addCourtToWrapper(court, wrapper);
-        return wrapper;
+        this.addCourtToWrapper(courtOpponent, opponent);
+
+        courtDiv.appendChild(opponent);
+
+        return courtDiv;
+
     },
 
     start: function() {        
