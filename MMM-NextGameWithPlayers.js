@@ -10,16 +10,26 @@ Module.register("MMM-NextGameWithPlayers",{
 
     socketNotificationReceived: function(notification, payload) {
         if(notification === 'GET_ALL_PLAYERS_NEXT_GAME'){
-          this.players.home = payload.home;
-          this.players.away = payload.away;
+          this.players = payload;
+          
           this.updateDom(3000); 
         }
     },
 
     // Override dom generator.
     getDom: function() {
-      
+       
         var wrapper = document.createElement("table");
+        
+        wrapper.style.backgroundImage = "url('http://localhost:8080/MMM-NextGameWithPlayers/soccer_court.png')";
+        // wrapper.style.height = "100%";
+        // wrapper.style.width = "100%";
+        wrapper.style.backgroundRepeat= 'no-repeat';
+        wrapper.style.backgroundSize = "100%";
+        // wrapper.style.minHeight = this.config.height;
+        // wrapper.style.minWidth = this.config.width;
+        wrapper.style.backgroundSize = "cover";
+    
         wrapper.className = "normal small light";
       
         var court = this.getCourtModel();
@@ -44,7 +54,7 @@ Module.register("MMM-NextGameWithPlayers",{
         }
       
         this.addCourtToWrapper(court, wrapper);
-
+      
         return wrapper;
     },
 
@@ -58,7 +68,7 @@ Module.register("MMM-NextGameWithPlayers",{
     createTableTdElement: function(id, text, colSpan) {
       var element = document.createElement('td');
       element.id = id;
-      element.style.border = '1px solid grey';
+      // element.style.border = '1px solid grey';
       element.colSpan = colSpan;
       element.innerHTML = text;
       return element;

@@ -2,7 +2,7 @@
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-Shows a table with all the players from your favorite team and the next Opponent. Based on [MMM-AllPlayers](https://github.com/julianvollmer/MMM-AllPlayers)
+Displays a table with all the players from your favorite team and the next Opponent. Based on [MMM-AllPlayers](https://github.com/julianvollmer/MMM-AllPlayers)
 The module is using [this API](http://api.football-data.org/index)
 
 ## Visualisation
