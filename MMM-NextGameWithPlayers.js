@@ -20,18 +20,8 @@ Module.register("MMM-NextGameWithPlayers",{
     getDom: function() {
        
         var wrapper = document.createElement("table");
+        wrapper.className = "normal small light bg";
         
-        wrapper.style.backgroundImage = "url('http://localhost:8080/MMM-NextGameWithPlayers/soccer_court.png')";
-        // wrapper.style.height = "100%";
-        // wrapper.style.width = "100%";
-        wrapper.style.backgroundRepeat= 'no-repeat';
-        wrapper.style.backgroundSize = "100%";
-        // wrapper.style.minHeight = this.config.height;
-        // wrapper.style.minWidth = this.config.width;
-        wrapper.style.backgroundSize = "cover";
-    
-        wrapper.className = "normal small light";
-      
         var court = this.getCourtModel();
         
         for (var i = 0; i < this.players.home.length; i++) {
@@ -54,7 +44,6 @@ Module.register("MMM-NextGameWithPlayers",{
         }
       
         this.addCourtToWrapper(court, wrapper);
-      
         return wrapper;
     },
 
@@ -218,7 +207,10 @@ Module.register("MMM-NextGameWithPlayers",{
       court.keeperRow.keeper = [];
 
       return court;
-    }
+    },
+    getStyles: function() {
+      return ["style.css"];
+    },
 });
 
 
