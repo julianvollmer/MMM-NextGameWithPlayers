@@ -11,7 +11,6 @@ Module.register("MMM-NextGameWithPlayers",{
     socketNotificationReceived: function(notification, payload) {
         if(notification === 'GET_ALL_PLAYERS_NEXT_GAME'){
           this.players = payload;
-          
           this.updateDom(3000); 
         }
     },
@@ -19,10 +18,15 @@ Module.register("MMM-NextGameWithPlayers",{
     // Override dom generator.
     getDom: function() {
         var courtDiv = document.createElement("div")
-        var myTeam = document.createElement("table");
-        var opponent = document.createElement("table");
-
-        courtDiv.className = "normal small light bg";
+        var opponentDiv = document.createElement("div");
+        var myTeamDiv = document.createElement("div");
+        courtDiv.className = "normal small light";
+        myTeamDiv.className = "courtHalf";
+        opponentDiv.className = "courtHalf";
+        var myTeamTable = document.createElement("table");
+        var opponentTable = document.createElement("table");
+        myTeamTable.className = "bg-down";
+        opponentTable.className = "bg-up";
 
         var courtMyTeam = this.getCourtModel();
         
@@ -30,25 +34,25 @@ Module.register("MMM-NextGameWithPlayers",{
           this.addToCourt(courtMyTeam, this.players.home[i]);
         }
       
-        this.addCourtToWrapper(courtMyTeam, myTeam);
-
-        courtDiv.appendChild(myTeam);
+        this.addCourtToWrapper(courtMyTeam, myTeamTable);
 
         var middleDiv = document.createElement("div");
         
         middleDiv.innerHTML = "--------------------"
-        courtDiv.appendChild(middleDiv);
 
         var courtOpponent = this.getCourtModelOpponent();
         
-        for (var i = 0; i < this.players.home.length; i++) {
-          this.addToCourt(courtOpponent, this.players.home[i]);
+        for (var i = 0; i < this.players.away.length; i++) {
+          this.addToCourt(courtOpponent, this.players.away[i]);
         }
       
-        this.addCourtToWrapper(courtOpponent, opponent);
-
-        courtDiv.appendChild(opponent);
-
+        this.addCourtToWrapper(courtOpponent, opponentTable);
+        myTeamDiv.appendChild(myTeamTable);
+        opponentDiv.appendChild(opponentTable);
+        courtDiv.appendChild(myTeamDiv);
+        // courtDiv.appendChild(middleDiv);
+        courtDiv.appendChild(opponentDiv);
+        console.log("*********** ajsdklajskdlajsd ***********")
         return courtDiv;
 
     },
