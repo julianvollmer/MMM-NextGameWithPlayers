@@ -32,6 +32,7 @@ module.exports = NodeHelper.create({
         var players = {};
         players.home = fball.players.getPlayers();
         players.away = fball.opponent.players.getPlayers();
+        players.info = fball.fixtures.getNextGame();
         self.sendSocketNotification("GET_ALL_PLAYERS_NEXT_GAME", players);
     },
 

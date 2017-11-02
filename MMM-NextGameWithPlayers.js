@@ -17,42 +17,46 @@ Module.register("MMM-NextGameWithPlayers",{
 
     // Override dom generator.
     getDom: function() {
+        var infoDiv = document.createElement("div")
         var courtDiv = document.createElement("div")
         var opponentDiv = document.createElement("div");
         var myTeamDiv = document.createElement("div");
+        var myTeamTable = document.createElement("table");
+        var opponentTable = document.createElement("table");
+        var courtMyTeam = this.getCourtModel();
+        var courtOpponent = this.getCourtModelOpponent();
+
         courtDiv.className = "normal small light";
         myTeamDiv.className = "courtHalf";
         opponentDiv.className = "courtHalf";
-        var myTeamTable = document.createElement("table");
-        var opponentTable = document.createElement("table");
         myTeamTable.className = "bg-down";
         opponentTable.className = "bg-up";
-
-        var courtMyTeam = this.getCourtModel();
+        // console.log();
+        if(this.players.info.homeTeamName){          
+          var home = this.players.info.homeTeamName;
+          var away = this.players.info.awayTeamName;
+          var date = this.players.info.date;
+          console.log(home + " : " + away);
+          infoDiv.innerHTML = home + " : " + away + "<br>" + date;
+        }
         
         for (var i = 0; i < this.players.home.length; i++) {
           this.addToCourt(courtMyTeam, this.players.home[i]);
         }
-      
-        this.addCourtToWrapper(courtMyTeam, myTeamTable);
 
-        var middleDiv = document.createElement("div");
-        
-        middleDiv.innerHTML = "--------------------"
-
-        var courtOpponent = this.getCourtModelOpponent();
-        
         for (var i = 0; i < this.players.away.length; i++) {
           this.addToCourt(courtOpponent, this.players.away[i]);
         }
-      
+
+        this.addCourtToWrapper(courtMyTeam, myTeamTable);      
         this.addCourtToWrapper(courtOpponent, opponentTable);
+        
         myTeamDiv.appendChild(myTeamTable);
         opponentDiv.appendChild(opponentTable);
+        courtDiv.appendChild(infoDiv);
         courtDiv.appendChild(myTeamDiv);
-        // courtDiv.appendChild(middleDiv);
         courtDiv.appendChild(opponentDiv);
-        console.log("*********** ajsdklajskdlajsd ***********")
+        
         return courtDiv;
 
     },
@@ -61,6 +65,7 @@ Module.register("MMM-NextGameWithPlayers",{
         this.players = {};
         this.players.home = {};
         this.players.away = {};
+        this.players.info = {};
         this.sendSocketNotification("CONNECTED", this.config.options);
     },
 
